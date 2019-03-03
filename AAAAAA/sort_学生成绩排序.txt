@@ -1,0 +1,56 @@
+#include<iostream>
+#include<iterator>>
+#include<vector>
+#include<string>
+#include<algorithm>
+#include<functional>
+
+using namespace std;
+class Student
+{
+public:
+	int No;
+	string name;
+	int grade;
+	Student(int No, string name, int grade)
+	{
+		this->No=No;
+		this->name = name;
+		this->grade=grade;
+	}
+	bool operator<(const Student& s)const
+	{
+		return grade < s.grade;
+	}
+	bool operator>(const Student&s)const
+	{
+		return grade > s.grade;
+	}
+};
+ostream &operator<<(ostream &os, const Student &s)
+{
+	os << s.No << "\t" << s.name << "\t" << s.grade;
+	return os;
+}
+int main()
+{
+	Student s1(101, "张三",90);
+	Student s2(102, "李四",23);
+	Student s3(103, "王五",34);
+	Student s4(104, "赵六",45);
+	Student s5(105, "苏七",56);
+	Student s6(106, "黑八",96);
+	vector<Student>v;
+	v.push_back(s1);
+	v.push_back(s2);
+	v.push_back(s3);
+	v.push_back(s4);
+	v.push_back(s5);
+	v.push_back(s6);
+	sort(v.begin(), v.end(),greater<Student>());
+	cout << "升序排序结果:" << endl;
+	copy(v.begin(), v.end(), ostream_iterator<Student>(cout, "\n"));
+	system("pause");
+	return 0;
+
+}

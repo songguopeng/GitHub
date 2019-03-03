@@ -1,0 +1,28 @@
+int main()
+{
+	int n;
+	
+	while (cin >> n)
+	{
+		char A[20][30] = {};
+		for (int i = 1; i <= n; i++)
+		{
+			for (int j = n; j > n - i; --j)
+			{
+				A[i][j] = 'A' + n - j;
+				A[i][n + n - j] = 'A' + n - j;
+			}
+		}
+		for (int i = 1; i <= n; ++i)
+		{
+			for (int j = 1; j <= 2*n-1; ++j)
+				if (A[i][j] == 0)
+					cout << " ";
+				else
+				cout << A[i][j];
+			cout << endl;
+		}
+
+	}
+	return 0;
+}

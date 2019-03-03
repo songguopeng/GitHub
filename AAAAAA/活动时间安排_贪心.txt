@@ -1,0 +1,41 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+struct p
+{
+	int s;
+	int f;
+};
+bool cmp(p x, p y)
+{
+	return x.f < y.f;
+}
+int main()
+{
+	int n;
+	while (cin >> n&&n != -1)
+	{
+		vector<p> vt(n);
+		for (int i = 0; i < n; i++)
+			cin >> vt[i].s >> vt[i].f;
+		sort(vt.begin(), vt.end(), cmp);
+		int cnt = 1;
+		int tmp = vt[0].f;
+		for (int i = 1; i < n; )
+		{
+			if (vt[i].s < tmp)
+				i++;
+			else
+			{
+				cnt++;
+				tmp = vt[i].f;
+				i++;
+			}
+		}
+		cout << cnt << endl;
+	}
+	system("pause");
+	return 0;
+}

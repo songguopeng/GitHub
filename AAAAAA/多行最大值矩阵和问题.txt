@@ -1,0 +1,55 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<iterator>
+#include<cstring>
+using namespace std;
+
+int max_num(int *A, int n)
+{
+	int *tmp = new int[n];
+	int max_sum = 0;
+	max_sum=tmp[0] = A[0];
+	for (int i = 1; i < n; i++)
+	{
+		tmp[i] = max(A[i], A[i] + tmp[i - 1]);
+		if (max_sum < tmp[i])
+			max_sum = tmp[i];
+	}
+	return max_sum;
+}
+int main()
+{
+	int n;
+	int A[105][105];
+	while (cin >> n)
+	{
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+				cin >> A[i][j];
+		int maxsum, maxleft, maxright, maxup, maxdown;
+		vector<int> sum;
+		int *tmp = new int[n];
+		
+		for (int up = 0; up < n; up++)
+		{
+			for (int low = up; low < n; low++)
+			{
+				for (int k = 0; k < n; k++)
+					tmp[k] = 0;
+				for (int k = 0; k < n; k++)
+				{
+					for (int i = up; i <= low; i++)
+						tmp[k] += A[i][k];
+				}
+				sum.push_back(max_num(tmp,n));
+			}
+		}
+		int max_sum = sum[0];
+		for (auto it = sum.begin() + 1; it != sum.end(); ++it)
+			if (max_sum < *it)
+				max_sum = *it;
+		cout << max_sum << endl;
+	}
+	return 0;
+}

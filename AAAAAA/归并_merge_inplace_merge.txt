@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>>
+#include<iterator>
+#include<functional>
+using namespace std;
+//merge是两个数组之间的归并，inplace_merge是同一个数组不同段之间的归并；
+int main()
+{
+	int a[] = { 1,3,5,7 };
+	int b[] = { 2,4,6,8 };
+	int result[8];
+	cout << "a原始：" << endl;
+	copy(a, a + 4, ostream_iterator<int>(cout, "\t"));
+	cout << "b原始" << endl;
+	reverse(a, a + 4);
+	reverse(b, b + 4);
+	copy(b, b + 4, ostream_iterator<int>(cout, "\t"));
+	merge(a,a+4, b,b+4, result,greater<int>());//a,b,与排序方式一致；
+	copy(result, result + 8, ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	int c[] = { 1,3,5,8,0,2,4,6 };
+	cout << "原始数据C:" << endl;
+	copy(c, c + 8, ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	inplace_merge(c, c + 4, c+8);
+	copy(c, c+ 8, ostream_iterator<int>(cout, "\t"));
+
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include<iostream>
+#include<vector>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+class CSum
+{
+private:
+	int sum;
+public:
+	CSum() { sum = 0; }
+	void operator()(int n)
+	{
+		sum += n;
+	}
+	int GetSum()
+	{
+		return sum;
+	}
+
+};
+int main()
+{
+	vector<int> v;
+	for (int i = 1; i <= 100; i++)
+		v.push_back(i);
+	CSum sObj = for_each(v.begin(), v.end(), CSum());
+	cout << sObj.GetSum() << endl;
+	system("pause");
+
+	return 0;
+}

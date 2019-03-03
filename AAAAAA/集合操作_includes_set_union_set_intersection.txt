@@ -1,0 +1,49 @@
+#include<iostream>
+#include<algorithm>
+#include<list>
+#include<iterator>
+#include<functional>
+
+using namespace std;
+
+int main()
+{
+	int a[] = { 1,2,3,4,5 };
+	int b[] = { 1,2,3,6 };
+	list<int>l1(a, a + 5), l2(b, b + 4);
+	cout << "a原始：";
+	copy(l1.begin(), l1.end(), ostream_iterator<int>(cout,"\t"));
+	cout << endl;
+	cout << "b原始：";
+	copy(l2.begin(), l2.end(), ostream_iterator<int>(cout,"\t"));
+	cout << endl;
+	list<int>l3;
+	cout << (includes(l1.begin(), l1.end(), l2.begin(), l2.end())) << endl;
+	set_union(l1.begin(), l1.end(), l2.begin(), l2.end(), back_inserter(l3));
+	copy(l3.begin(), l3.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+
+	list<int>l4;
+	set_intersection(l1.begin(), l1.end(), l2.begin(), l2.end(), back_inserter(l4));
+	cout << "l1,l2的交集：";
+	copy(l4.begin(), l4.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	list<int>l5;
+	set_difference(l1.begin(), l1.end(), l2.begin(), l2.end(), back_inserter(l5));
+	cout << "l1-l2的差集：";
+	copy(l5.begin(), l5.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	list<int>l6;
+	set_symmetric_difference(l1.begin(), l1.end(), l2.begin(), l2.end(), back_inserter(l6));
+	cout << "l1 l2的对称差";
+	copy(l6.begin(), l6.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	list<int>l7;
+	merge(l1.begin(), l1.end(), l2.begin(), l2.end(), back_inserter(l7));
+	cout << "l1和l2合并后";
+	copy(l7.begin(), l7.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	system("pause");
+	return 0;
+
+}

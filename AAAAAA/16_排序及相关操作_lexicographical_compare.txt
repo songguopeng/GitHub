@@ -1,0 +1,42 @@
+#include<iostream>
+#include<algorithm>
+#include<iterator>
+#include<vector>
+#include<functional>
+using namespace std;
+//lexicographical_compare函数是用来比较两个容器的大小，包括元素和个数，他的原则是这样的：
+//
+//1、一次比较两个容器中的元素，若遇到第一个不同的元素，则根据元素的大小决定容器的大小
+//
+//2、当两个容器元素都相同，个数不同时，若第一个容器个数小于第二个容器的元素个数，则第一个容器小于第二个容器
+//
+//3、元素个数与元素都相等时，两个容器相等，函数返回false
+//
+//只有当第一个容器小于第二个容器时，lexicographical_compare函数才会返回true。
+
+bool mycompare(vector<int>& v1, vector<int>& v2)
+{
+	return lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end());
+}
+int main()
+{
+	int a[] = { 1,2,3 };
+	int b[] = { 1,2,2 };
+	int c[] = { 1,2,3,1 };
+	vector<int>v[] = { vector<int>(a,a + 3),vector<int>(b,b + 3),vector<int>(c,c + 4) };
+	cout << "原始：" << endl;
+	for (int i = 0; i < 3; i++)
+	{
+		copy(v[i].begin(), v[i].end(), ostream_iterator<int>(cout, "\t"));
+		cout << endl;
+	}
+	sort(v, v + 3, mycompare);
+	cout << "排序后：" << endl;
+	for (int i = 0; i < 3; i++)
+	{
+		copy(v[i].begin(), v[i].end(), ostream_iterator<int>(cout, "\t"));
+		cout << endl;
+	}
+	system("pause");
+	return 0;
+}

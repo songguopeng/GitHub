@@ -1,0 +1,20 @@
+#include<iostream>
+#include<sstream>
+#include<string>
+#include<iomanip>
+using namespace std;
+//整型转化为字符；
+//int main()
+//{
+//	float n;
+//	stringstream os;
+//	while (cin >> n)
+//	{
+//		os.clear();
+//		os.str("");
+//		os << fixed << setprecision(10) << n;
+//		string str;
+//		os >> str;
+//		cout << str << endl;
+//	}
+//}

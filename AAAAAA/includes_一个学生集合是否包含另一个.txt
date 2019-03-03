@@ -1,0 +1,26 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+struct student
+{
+	int no;
+	char name[30];
+	bool operator<(const student& s)const
+	{
+		return no < s.no;
+	}
+};
+int main()
+{
+	bool bRet;
+	student s1[] = { {1001,"qwer"},{1003,"dsffsdafda"},{1002,"fsadffsddga"},{1004,"dfsdfssadfgdfghssssssssg"} };
+	student s2[] = { {1001,"zhang"},{1004,"wang"},{1003,"zhao"} };
+	sort(s1, s1 + 4);
+	sort(s2, s2 + 3);
+	bRet = includes(s1, s1 + 4, s2, s2 + 3);
+	cout << bRet << endl;
+	getchar();
+	return 0;
+}

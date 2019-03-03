@@ -1,0 +1,54 @@
+#include<iostream>
+#include<functional>
+#include<iterator>
+using namespace std;
+
+void merge(int *a, int *b, int low, int mid,int high)
+{
+	//合并需要O（n）时间，需要缓冲空间
+	int i = low, j = mid + 1, k = low;
+	while (i <= mid&&j <= high)
+	{
+		if (a[i] <= a[j])
+			b[k++] = a[i++];
+		else
+			b[k++] = a[j++];
+	}
+	while (i <= mid)
+		b[k++] = a[i++];
+	while (j <= high)
+		b[k++] = a[j++];
+}
+
+
+void mergeSort(int *a,int *b, int low, int high)
+{
+	if (high > low)
+	{
+		int mid = (high + low) / 2;
+		mergeSort(a, b, 0, mid);
+		mergeSort(a, b, mid + 1, high);
+		merge(a, b, low, mid, high);
+		for (int i = 0; i <=high; i++)
+			a[i] = b[i];
+	}
+
+}
+
+
+int main()
+{
+	int a[1000];
+	int b[10000];;
+	int n;
+	while (cin >> n&&n != -1)
+	{
+		for (int i = 0; i < n; i++)
+			cin >> a[i];
+		mergeSort(a, b, 0, n - 1);
+		copy(a, a + n, ostream_iterator<int>(cout, "\t"));
+		cout << endl;
+	}
+	system("pause");
+	return 0;
+}

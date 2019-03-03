@@ -1,0 +1,51 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<iterator>
+#include<functional>
+using namespace std;
+//建小堆用的是二元函数greater不是less；建最大堆用的二元函数是；less，而不是greater，与常规用到的二元函数相反；
+int main()
+{
+	vector<int> v;
+	int a;
+	while (cin >> a&&a)
+	{
+		v.push_back(a);
+	}
+	cout << "原始：";
+
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	sort_heap(v.begin(), v.end());
+	//sort(v.begin(), v.end(), less<int>());//升序
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	make_heap(v.begin(), v.end(),greater<int>());//降序
+
+	cout << "小顶堆：";
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	
+
+	/*make_heap(v.begin(), v.end(), less<int>());
+	cout << "大顶堆：";
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;*/
+	int n;
+	cin >> n;
+	int i = 0;
+	while (i<n)
+	{
+		pop_heap(v.begin(), v.end()-i, greater<int>());
+		i++;
+	}
+	cout << *(v.end() - n) << endl;
+	//cout << *(v.begin()) << endl;
+	//pop_heap(v.begin(), v.end(), greater<int>());
+	//cout << *(v.end() - 1) << endl;//不是真的把最值排出去，而是first 和last作交换，在[first,last-1)内重新做堆；
+	//pop_heap(v.begin(), v.end()-1, greater<int>());
+	//cout << *(v.end() - 2) << endl;//不是真的把最值排出去，而是first 和last作交换，在[first,last-1)内重新做堆；
+	system("pause");
+	return 0;
+}

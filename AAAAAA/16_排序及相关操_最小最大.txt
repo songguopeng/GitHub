@@ -1,0 +1,29 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<iterator>
+
+using namespace std;
+
+int main()
+{
+	vector<int> v;
+	int a;
+	while (cin >> a&&a)
+	{
+		v.push_back(a);
+	}
+	cout << "原始:";
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\t"));
+	cout << endl;
+	cout << "最小元素：";
+	vector<int>::iterator p = min_element(v.begin(), v.end());
+	cout <<*(p) << endl;
+	cout << "最大元素：";
+	auto q = max_element(v.begin(), v.end());
+	auto d = minmax_element(v.begin(), v.end());
+	cout << *(q) << endl;
+	cout << *d.first << " " << *d.second << endl;//最小最大
+	system("pause");
+	return 0;
+}

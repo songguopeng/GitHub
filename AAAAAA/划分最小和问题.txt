@@ -1,0 +1,58 @@
+#include<iostream>
+#include<vector>
+#include<limits.h>
+using namespace std;
+bool sum_m(int *A,int n, int m, int pre_max_num)
+{
+	int cnt = 0;
+	int sum = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		
+		if (sum+A[i] > pre_max_num)
+		{
+			cnt++;
+			sum = 0;
+		}
+		if (cnt > m - 1)
+		{
+			return false;
+		}
+		sum = sum + A[i];
+	}
+	return true;
+}
+int main()
+{
+	int n, m;
+	while (cin >> n >> m)
+	{
+		int max_num = INT_MIN;
+		int sum = 0;
+		int* A = new int[n];
+		for (int i = 0; i < n; i++)
+		{
+			cin >> A[i];
+			sum += A[i];
+			max_num = max_num > A[i] ? max_num : A[i];
+		}
+		int mid;
+		int low = max_num;
+		int high = sum;
+		while (low <= high)
+		{
+			mid = (low + high) / 2;
+			if (sum_m(A,n, m, mid))
+			{
+				high = mid-1 ;
+			}
+			else
+			{
+				low = mid + 1;
+			}
+		}
+		cout << low << endl;
+		
+	}
+	return 0;
+}
